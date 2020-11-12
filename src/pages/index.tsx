@@ -1,24 +1,33 @@
-import Typography from '@material-ui/core/Typography'
-import { Box, Container } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import Copyright from '../atoms/Coryright'
+import { ReactElement } from 'react'
+import { useFetchUser } from '../lib/user'
+import Layout from '../templates/Layout'
 
-const useStyles = makeStyles({
-  component: {
-    textAlign: 'center',
-  },
-})
-
-export default function Index(): React.ReactElement {
-  const classes = useStyles()
+export default function Index(): ReactElement {
+  const { user, loading } = useFetchUser()
   return (
-    <Container maxWidth="lg">
-      <Box my={4} className={classes.component}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Next.js with TypeScript example
-        </Typography>
-        <Copyright />
-      </Box>
-    </Container>
+    <Layout user={user} loading={loading}>
+      <h1>Next.js and Auth0 Example</h1>
+
+      {loading && <p>Loading login info...</p>}
+
+      {!loading && !user && (
+        <>
+          <p>
+            To test the login click in <i>Login</i>
+          </p>
+          <p>
+            Once you have logged in you should be able to click in{' '}
+            <i>Profile</i> and <i>Logout</i>
+          </p>
+        </>
+      )}
+
+      {user && (
+        <>
+          <h4>Rendered user info on the client</h4>
+          <pre>{JSON.stringify(user, null, 2)}</pre>
+        </>
+      )}
+    </Layout>
   )
 }

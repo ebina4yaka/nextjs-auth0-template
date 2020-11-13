@@ -1,5 +1,5 @@
 import Router from 'next/router'
-import React, { Component } from 'react'
+import { Component, ReactElement } from 'react'
 
 import Layout from '../templates/Layout'
 import createLoginUrl from '../lib/url-helper'
@@ -9,7 +9,7 @@ export default class RedirectToLogin extends Component {
     window.location.assign(createLoginUrl(Router.pathname))
   }
 
-  render(): React.ReactElement {
+  render(): ReactElement {
     return (
       <Layout loading>
         <div>Signing you in...</div>

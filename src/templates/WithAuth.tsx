@@ -10,7 +10,7 @@ import {
 import auth0 from '../lib/auth0'
 import { fetchUser } from '../lib/user'
 import createLoginUrl from '../lib/url-helper'
-import RedirectToLogin from '../atoms/LoginRedirect'
+import LoginRedirect from '../atoms/LoginRedirect'
 
 type AuthenticatedProps = {
   user?: never
@@ -54,7 +54,7 @@ export default function WithAuth(
     render() {
       // eslint-disable-next-line react/destructuring-assignment
       if (!this.props.user) {
-        return <RedirectToLogin />
+        return <LoginRedirect />
       }
 
       return (

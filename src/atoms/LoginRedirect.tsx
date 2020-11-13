@@ -1,19 +1,16 @@
 import Router from 'next/router'
-import { Component, ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
 
 import Layout from '../templates/Layout'
 import createLoginUrl from '../lib/url-helper'
 
-export default class RedirectToLogin extends Component {
-  componentDidMount(): void {
+export default function LoginRedirect(): ReactElement {
+  useEffect(() => {
     window.location.assign(createLoginUrl(Router.pathname))
-  }
-
-  render(): ReactElement {
-    return (
-      <Layout loading>
-        <div>Signing you in...</div>
-      </Layout>
-    )
-  }
+  }, [])
+  return (
+    <Layout loading>
+      <div>Signing you in...</div>
+    </Layout>
+  )
 }
